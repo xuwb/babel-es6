@@ -40,7 +40,11 @@ gulp.task('watch', function() {
 });
 
 // webpack
-var webpack = require('webpack')
-gulp.task('')
+var webpack = require('webpack-stream');
+gulp.task('webpack', function() {
+    return gulp.src('')
+        .pipe(webpack(require('./webpack.config.js')))
+        .pipe(gulp.dest('dist'));
+})
 
 gulp.task('default', ['watch']);
