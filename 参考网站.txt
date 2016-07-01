@@ -5,3 +5,4 @@ https://github.com/demohi/learning-gulp
 http://my.oschina.net/wolfx/blog/673922
 https://www.npmjs.com/package/webpack-stream
 https://www.npmjs.com/package/vinyl-named
+http://webpack.github.io/docs/usage.html

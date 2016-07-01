@@ -41,8 +41,10 @@ gulp.task('watch', function() {
 
 // webpack
 var webpack = require('webpack-stream');
+var named = require('vinyl-named');
 gulp.task('webpack', function() {
     return gulp.src('')
+        .pipe(named())
         .pipe(webpack(require('./webpack.config.js')))
         .pipe(gulp.dest('dist'));
 })
