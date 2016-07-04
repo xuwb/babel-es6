@@ -3,12 +3,8 @@
 		base: './',
 		alias: {
 			'jquery'  : 'src/build/jquery-1.11.2',
-			'init'	  : 'src/main'
+			'init'	  : 'dist/main'
 		},
-        paths: {
-            'babel-runtime' : 'node_modules/babel-runtime',
-            'core-js' : 'node_modules/core-js'
-        },
 		debug: true,
 		charset: 'utf-8'
 	}

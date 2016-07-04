@@ -21,7 +21,7 @@ var babelTask = (e) => {
         gulp.src( file )
         .pipe( babel( { 
             presets: ['es2015', 'react'], 
-            plugins: ['transform-runtime', 'transform-es2015-modules-umd'] 
+            plugins: ['transform-runtime']  // 'transform-es2015-modules-umd'
         } ).on('error', (e) => {
             console.error('error', e.message);
         }) )
@@ -29,24 +29,31 @@ var babelTask = (e) => {
     }
 };
 
-// watch
-gulp.task('watch', function() {
-    // babel & jsx
-    gulp.watch(['src/**/*.jsx', 'src/**/*.es6']).on('change', (event) => {
-        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...[babel]');
-        babelTask(event);
-    });
-    gulp.watch('./src/sass/**/*.scss', ['sass']);
-});
-
 // webpack
+var del = require('del');
 var webpack = require('webpack-stream');
 var named = require('vinyl-named');
-gulp.task('webpack', function() {
-    return gulp.src('')
+
+gulp.task('webpack', (cb) => {
+    del(['dist/**/*.js'], cb);
+    gulp.src(['src/**/*.jsx', 'src/**/*.es6'])
         .pipe(named())
         .pipe(webpack(require('./webpack.config.js')))
         .pipe(gulp.dest('dist'));
+});
+
+// watch
+gulp.task('watch', () => {
+    gulp.watch(['src/**/*.jsx', 'src/**/*.es6'], ['webpack']);
 })
+// gulp.task('watch', function() {
+//     // babel & jsx
+//     gulp.watch(['src/**/*.jsx', 'src/**/*.es6']).on('change', (event) => {
+//         // console.log('File ' + event.path + ' was ' + event.type + ', running tasks...[babel]');
+//         // babelTask(event);
+//         console.log('File ' + event.path + ' was ' + event.type + ', running tasks...[webpack]');
+//         webPackTask(event);
+//     });
+// });
 
 gulp.task('default', ['watch']);
