@@ -32,11 +32,15 @@ var babelTask = (e) => {
 // webpack
 var del = require('del');
 var webpack = require('webpack-stream');
+// vinyl-named 可以自动对生成文件命名，
+// 不需要通过webpack.config中的output来命名
 var named = require('vinyl-named');
+var path = require('path');
 
 gulp.task('webpack', (cb) => {
+    // console.log(path.join(__dirname, 'src/testPath.js'));
     del(['dist/**/*.js'], cb);
-    gulp.src(['src/**/*.jsx', 'src/**/*.es6'])
+    gulp.src(['src/**/*.jsx', 'src/**/*.es6', 'src/js/**/*.js'])
         .pipe(named())
         .pipe(webpack(require('./webpack.config.js')))
         .pipe(gulp.dest('dist'));
