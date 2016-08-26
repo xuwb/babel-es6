@@ -32,18 +32,42 @@ var babelTask = (e) => {
 // webpack
 var del = require('del');
 var webpack = require('webpack-stream');
-// vinyl-named 可以自动对生成文件命名，
-// 不需要通过webpack.config中的output来命名
+// vinyl-named 可以在gulp中对生成文件命名，或者通过webpack.config中的output来命名
 var named = require('vinyl-named');
-var path = require('path');
+// var path = require('path');
+// var fs = require('vinyl-fs');
+var vinylPaths = require('vinyl-paths');
+var webpackReg = /src(.*)\/.*\.(\w+)/;;
 
 gulp.task('webpack', (cb) => {
     // console.log(path.join(__dirname, 'src/testPath.js'));
-    del(['dist/**/*.js'], cb);
-    gulp.src(['src/**/*.jsx', 'src/**/*.es6', 'src/js/**/*.js'])
-        .pipe(named())
-        .pipe(webpack(require('./webpack.config.js')))
-        .pipe(gulp.dest('dist'));
+    // webpack-stream 无法根据输入路径，返回dest路径，只会输出到dest
+    del('dist/*', cb);
+
+    // 根据输入路径，输出到不同目录
+    gulp.src(['src/js/**/*.js', 
+              'src/js/**/*.es6', 
+              'src/css/**/*.less', 
+              'src/css/**/*.scss', 
+              '!src/build/*.js'])
+        .pipe(vinylPaths(function (paths) {
+            
+            var match = paths.replace(/\\/g, '/').match( webpackReg );
+            // 文件是一个个传入，故common插件无法合并相同require代码
+            if(match.length){
+                gulp.src(match[0])
+                    .pipe(named())
+                    .pipe(webpack(require('./webpack.config.js')))
+                    .pipe(gulp.dest('dist/'+match[1]));
+            }
+            return Promise.resolve();
+        }))
+    // common插件有效
+    // gulp.src(['src/js/testExports_B.js', 'src/js/testRequire_A.js'])
+    //     .pipe(named())
+    //     .pipe(webpack(require('./webpack.config.js')))
+    //     .pipe(gulp.dest('dist/'));
+        
 });
 
 // watch
