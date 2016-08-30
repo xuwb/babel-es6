@@ -1,8 +1,0 @@
-http://www.ituring.com.cn/article/199293
-http://www.jianshu.com/p/8c9c8f5649c9
-http://www.open-open.com/news/view/1c51682
-https://github.com/demohi/learning-gulp
-http://my.oschina.net/wolfx/blog/673922
-https://www.npmjs.com/package/webpack-stream
-https://www.npmjs.com/package/vinyl-named
-http://webpack.github.io/docs/usage.html

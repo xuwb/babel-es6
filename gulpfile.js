@@ -45,29 +45,41 @@ gulp.task('webpack', (cb) => {
     del('dist/*', cb);
 
     // 根据输入路径，输出到不同目录
+    // gulp.src(['src/js/**/*.js', 
+    //           'src/js/**/*.es6', 
+    //           'src/css/**/*.less', 
+    //           'src/css/**/*.scss', 
+    //           '!src/build/*.js'])
+    //     .pipe(vinylPaths(function (paths) {
+            
+    //         var match = paths.replace(/\\/g, '/').match( webpackReg );
+    //         // 文件是一个个传入，故common插件无法合并相同require代码
+    //         if(match.length){
+    //             gulp.src(match[0])
+    //                 .pipe(named())
+    //                 .pipe(webpack(require('./webpack.config.js')))
+    //                 .pipe(gulp.dest('dist/'+match[1]));
+    //         }
+    //         return Promise.resolve();
+    //     }))
+    // common插件有效
+    var path = require('path');
+    var webpackReg = /src\/(.*)\.(\w+)/;;
     gulp.src(['src/js/**/*.js', 
               'src/js/**/*.es6', 
               'src/css/**/*.less', 
               'src/css/**/*.scss', 
               '!src/build/*.js'])
-        .pipe(vinylPaths(function (paths) {
-            
-            var match = paths.replace(/\\/g, '/').match( webpackReg );
-            // 文件是一个个传入，故common插件无法合并相同require代码
+        .pipe(named(function(file){
+            var match = file.path.replace(/\\/g, '/').match( webpackReg );
+            var fileName = path.basename(file.path, path.extname(file.path));
             if(match.length){
-                gulp.src(match[0])
-                    .pipe(named())
-                    .pipe(webpack(require('./webpack.config.js')))
-                    .pipe(gulp.dest('dist/'+match[1]));
+                fileName = match[1] ;
             }
-            return Promise.resolve();
+            return fileName;
         }))
-    // common插件有效
-    // gulp.src(['src/js/testExports_B.js', 'src/js/testRequire_A.js'])
-    //     .pipe(named())
-    //     .pipe(webpack(require('./webpack.config.js')))
-    //     .pipe(gulp.dest('dist/'));
-        
+        .pipe(webpack(require('./webpack.config.js')))
+        .pipe(gulp.dest('dist/'));
 });
 
 // watch

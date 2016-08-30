@@ -4,6 +4,12 @@ require('css/1');
 
 require('css/2');
 
+var src2 = require('js/testImage/testImage2/img2').src;
+var src = require('js/testImage/img').src;
+var src3 = require('js/testImage3/img3').src;
+
+console.log(src)
+
 class Cls {
     constructor() {
         this.state = {
@@ -22,7 +28,8 @@ $(function(){
 
     var img = new Image();
     // img.src = 'src/images/11.jpg';
-    img.src = require('images/11.jpg');
+    // img.src = require('images/11.jpg');
+    img.src = src2;
     $('body').append(img);
 })
 

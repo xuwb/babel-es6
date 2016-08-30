@@ -13,9 +13,9 @@ module.exports = {
             jquery: path.join(__dirname, 'src/build/jquery-1.11.2')
         }
     },
-    // output: {
-    //     publicPath: '/dist/'
-    // },
+    output: {
+        publicPath: '/dist/'
+    },
     // entry: {
     //     B1: "js/testExports_B",
     //     A1: 'js/testRequire_A'
@@ -30,7 +30,7 @@ module.exports = {
     },
     plugins: [
         // 会将入口文件中相同的require内容打包到common.js中
-        // new webpack.optimize.CommonsChunkPlugin("common.js")
+        new webpack.optimize.CommonsChunkPlugin("common.js")
     ],
     // 在js文件中可直接使用 $ 不需要再require('jquery')引入。会打包到最终生成文件中
     // plugins: [
@@ -70,7 +70,7 @@ module.exports = {
             test: /\.(png|jpg)$/,
             // 可以使用相对路径'../'相对于调用该图片的文件目录，或使用根目录'/'
             // 编译后调用图片的路径为 publicPath + name 会直接拼接字符串，不会根据../去匹配实际目录
-            loader: 'url?limit=10000&name=/dist/images/[name].[ext]'
+            loader: 'url?limit=10000&name=images/[name].[ext]'
         }]
     }
 };

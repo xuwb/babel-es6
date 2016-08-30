@@ -1,62 +1,14 @@
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
-/******/ 			return installedModules[moduleId].exports;
-/******/
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			exports: {},
-/******/ 			id: moduleId,
-/******/ 			loaded: false
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
+webpackJsonp([4,9],{
+
+/***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(1);
+	module.exports = __webpack_require__(48);
 
 
 /***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
 
-	var c = __webpack_require__(2)
-	var MySalute = "Hello World！\n";
-	module.exports = MySalute + c;
-
-/***/ },
-/* 2 */
+/***/ 8:
 /***/ function(module, exports) {
 
 	module.exports = 'A和B都引用C，同时A引用B。\
@@ -65,6 +17,16 @@
 	解决办法：1、将通用资源放到到页面 <script> 中，通过config文件中的 externals: { } 加载 \n'
 
 
+/***/ },
+
+/***/ 48:
+/***/ function(module, exports, __webpack_require__) {
+
+	var c = __webpack_require__(8)
+	var MySalute = "Hello World！\n";
+	module.exports = MySalute + c;
+
 /***/ }
-/******/ ]);
+
+});
 //# sourceMappingURL=testExports_B.js.map
