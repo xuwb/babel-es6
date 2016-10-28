@@ -1,5 +1,7 @@
+@import url('variable.less');
+
 @bg: yellow;
-@bg-img: url('images/bg.jpg');
+@bg-img: url('@{lessPath}images/bg.jpg');
 body {
     background: @bg @bg-img no-repeat;
     background-size: cover;

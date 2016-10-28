@@ -30,7 +30,12 @@ module.exports = {
     },
     plugins: [
         // 会将入口文件中相同的require内容打包到common.js中
-        new webpack.optimize.CommonsChunkPlugin("common.js")
+        new webpack.optimize.CommonsChunkPlugin("common.js"),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
     ],
     // 在js文件中可直接使用 $ 不需要再require('jquery')引入。会打包到最终生成文件中
     // plugins: [

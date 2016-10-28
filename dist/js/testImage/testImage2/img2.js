@@ -1,26 +1,2 @@
-webpackJsonp([6,9],{
-
-/***/ 0:
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(42);
-
-
-/***/ },
-
-/***/ 42:
-/***/ function(module, exports, __webpack_require__) {
-
-	exports.src = __webpack_require__(43);
-
-/***/ },
-
-/***/ 43:
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "images/22.jpg";
-
-/***/ }
-
-});
+webpackJsonp([7,10],{0:function(n,o,p){n.exports=p(44)},44:function(n,o,p){o.src=p(45)},45:function(n,o,p){n.exports=p.p+"images/22.jpg"}});
 //# sourceMappingURL=img2.js.map
